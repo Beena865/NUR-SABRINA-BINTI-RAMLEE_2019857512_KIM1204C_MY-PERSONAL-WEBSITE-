@@ -1,0 +1,280 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+  box-sizing: border-box;
+}
+.menu {
+  float: left;
+  width: 20%;
+}
+.menuitem {
+  padding: 8px;
+  margin-top: 7px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.main {
+  float: left;
+  width: 60%;
+  padding: 0 20px;
+  overflow: hidden;
+}
+.right {
+  background-color: lightblue;
+  float: left;
+  width: 20%;
+  padding: 10px 15px;
+  margin-top: 7px;
+}
+
+@media only screen and (max-width:800px) {
+  /* For tablets: */
+  .main {
+    width: 80%;
+    padding: 0;
+  }
+  .right {
+    width: 100%;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width: 100%;
+  }
+}
+</style>
+</head>
+
+<style>
+body {
+  background-image: url('https://img.okezone.com/content/2013/07/28/56/843607/bLNm6XVu92.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+}
+</style>
+</head>
+
+<style>
+body {
+  counter-reset: section;
+}
+
+h2::before {
+  counter-increment: section;
+  content: "Section " counter(section) ": ";
+}
+</style>
+</head>
+<body>
+<center>
+<h1><font color="Cyan">All who open My Website will be able to find out what is contained in this Website:</h1>
+<h2>You going to find out My Biodata</h2>
+<h2>You find out My Picture</h2>
+<h2>You'll find out what I'm learning</h2>
+
+<head>
+<title>WEBSITE BEENA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+<body>
+<style>
+a:link, a:visited {
+  background: linear-gradient(to bottom, #00ff99 0%, #ff3399 100%);
+  color: MidnightBlue;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background: linear-gradient(to bottom, #00ff99 0%, #ff3399 100%);
+  color: white;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(163, 0, 255, 1);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: blue;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
+<br>
+<center><canvas id="canvas" width="400" height="400"
+style="background-color:#333">
+</canvas>
+
+<script>
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  grad.addColorStop(0, '#333');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, '#333');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  ctx.fillStyle = '#333';
+  ctx.fill();
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius*0.15 + "px arial";
+  ctx.textBaseline="middle";
+  ctx.textAlign="center";
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+}
+
+function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+}
+</script>
+
+</head>
+<body>
+
+<h1 style="text-align:center;font-size:80px;background: linear-gradient(to bottom, #6666ff 0%, #ff3399 100%);color:Khaki"><span style="cursor:default">WELCOME TO BEENA WEBSITE</span><br></h1>
+
+<center>
+<p>
+<font size="5">
+<a href="index.html">MY HOME PAGE</a>
+<a href="webpage2.html">MY BIODATA</a>
+<a href="webpage3.html">MY EXPERIENCE</a>
+<a href="webpage4.html">MY EDUCATION</a>
+<a href="webpage5.html">MY FAMILY</a>
+<a href="webpage6.html">MY GALLERY</a>
+<a href="webpage7.html">MY AMBITION</a>
+</p>
+</center>
+<br>
+<br>
+<div class="card" style="background-color:LightGrey;">
+ <img src="beena.jpeg" alt="John" style="width:100%">
+  <font size="3">
+  <p><font color="Black">FACULTY OF INFORMATION MANAGEMENT</p>
+  <p>UNIVERSITI TEKNOLOGI MARA MERBOK, KEDAH</p>
+  <p>DIPLOMA IN LIBRARY MANAGEMENT
+  (IM120)</p>
+  <P>INTRODUCTION TO WEB CONTENT MANAGEMENT AND DESIGN
+  <br>
+  (IMD311)</p>
+  <b><p>"MY PERSONAL WEBSITE"</b></p>
+  <p>NUR SABRINA BINTI RAMLEE</p>
+  <p>(2019857512)</p>
+  <p>KIM1204C</p>
+  <p>MOHD FIRDAUS BIN MOHD HELMI</p>
+<div style="margin: 24px 0;">   
+    <a href="https://www.facebook.com/profile.php?id=100027906975514" style="background:none;"><i class="fa fa-facebook"></i></a>
+    <a href="https://www.instagram.com/beena.na00/" style="background:none;"><i class="fa fa-instagram"></i></a>
+  </div>
+</div>
+
+<br>
+<br>
+<h2 style="text-align:center;font-size:190%;color:Aqua"><span style="cursor:default">Hello Everyone!!!</span><br></h2>
+
+<p style="text-align:center;font-size:200%;color:Chartreuse"><span style="cursor:default"><i>Thank You For Visiting My Website &#128513;</span><br></i></p>
+<p style="text-align:center;font-size:200%;color:Chartreuse"><span style="cursor:default"><i>This Is My Personal Website, Where I Will Share Everything About Myself &#9996;</span><br></i></p>
+<p style="text-align:center;font-size:200%;color:Chartreuse"><span style="cursor:default"><i>Please Look Forward Into It And Enjoyed All The Moments &#10024;</span><br></i></p>
+
+<embed src="[OST RYAN ARALYN] Sarah Suhairi & Aepul Roza - Entah Apa [Official Music Video].mp3" autoplay="true" hidden="true" loop="true"></embed>
+
+</body>
+</html>
